@@ -2,6 +2,8 @@ import { Component } from "react"; // importing Component class from react libra
 import logo from "./logo.svg";
 import "./App.css";
 
+import CardList from "./components/card-list/card-list.component";
+
 class App extends Component {
   // the constructor is invoked first whenever the class is instantiated
   constructor() {
@@ -42,7 +44,7 @@ class App extends Component {
 
   // render method, renders the JSX immediatedly after constructor is called
   render() {
-    // destructure state properties
+    // destructure state properties (code-readability)
     const { monsters, searchField } = this.state;
     const { onChangeHandler } = this;
 
@@ -60,7 +62,7 @@ class App extends Component {
           placeholder="search monsters"
           onChange={onChangeHandler}
         />
-        {
+        {/* {
           // display filtered list of monsters all the time, to preserve the original list
           filteredMonsters.map((monster) => {
             return (
@@ -69,7 +71,8 @@ class App extends Component {
               </div>
             );
           })
-        }
+        } */}
+        <CardList />
       </div>
     );
   }
