@@ -10,7 +10,7 @@ class App extends Component {
     // defines the state of the component
     this.state = {
       monsters: [],
-      searchField: "" // initially the searchField is empty, hence all monsters are displayed
+      searchField: "", // initially the searchField is empty, hence all monsters are displayed
     };
   }
 
@@ -28,35 +28,48 @@ class App extends Component {
       });
   }
 
+  // define the onChange handler for input outside the render method to optimize performance
+  onChangeHandler = (event) => {
+    // convert the input text into lowercase
+    const searchField = event.target.value.toLocaleLowerCase();
+    // change the searchString property to re-render the component
+    this.setState(() => {
+      return {
+        searchField,
+      };
+    });
+  };
+
   // render method, renders the JSX immediatedly after constructor is called
   render() {
+    // destructure state properties
+    const { monsters, searchField } = this.state;
+    const { onChangeHandler } = this;
+
     // creating a new list of filtered monsters based on the input-text
-    const filteredMonsters = this.state.monsters.filter((monster) => {
-      return monster.name.toLocaleLowerCase().includes(this.state.searchField);
+    const filteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchField);
     });
 
     console.log("render");
     return (
       <div className="App">
-        <input className="search-box" type="search" placeholder="search monsters" onChange={(event) => {
-          // convert the input text into lowercase
-          const searchField = event.target.value.toLocaleLowerCase();
-          // change the searchString property to re-render the component
-          this.setState(() => {
-            return {
-              searchField
-            };
-          })
-        }}/>
+        <input
+          className="search-box"
+          type="search"
+          placeholder="search monsters"
+          onChange={onChangeHandler}
+        />
         {
           // display filtered list of monsters all the time, to preserve the original list
           filteredMonsters.map((monster) => {
-          return (
-            <div key={monster.id}>
-              <h1>{monster.name}</h1>
-            </div>
-          );
-        })}
+            return (
+              <div key={monster.id}>
+                <h1>{monster.name}</h1>
+              </div>
+            );
+          })
+        }
       </div>
     );
   }
