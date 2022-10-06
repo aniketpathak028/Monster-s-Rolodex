@@ -7,7 +7,6 @@ import CardList from "./components/card-list/card-list.component";
 class App extends Component {
   // the constructor is invoked first whenever the class is instantiated
   constructor() {
-    console.log("constructor");
     super(); // call super method
     // defines the state of the component
     this.state = {
@@ -18,7 +17,6 @@ class App extends Component {
 
   // lifecycle method that runs when the component first mounts
   componentDidMount() {
-    console.log("componentDidMount");
     // native fetch that returns a promise on success
     fetch(`https://jsonplaceholder.typicode.com/users`)
       .then((response) => response.json()) // transforms response into json
@@ -53,7 +51,6 @@ class App extends Component {
       return monster.name.toLocaleLowerCase().includes(searchField);
     });
 
-    console.log("render");
     return (
       <div className="App">
         <input
@@ -62,17 +59,7 @@ class App extends Component {
           placeholder="search monsters"
           onChange={onChangeHandler}
         />
-        {/* {
-          // display filtered list of monsters all the time, to preserve the original list
-          filteredMonsters.map((monster) => {
-            return (
-              <div key={monster.id}>
-                <h1>{monster.name}</h1>
-              </div>
-            );
-          })
-        } */}
-        <CardList />
+        <CardList monsters= {filteredMonsters}/>
       </div>
     );
   }
