@@ -2,7 +2,9 @@ import { Component } from "react"; // importing Component class from react libra
 import logo from "./logo.svg";
 import "./App.css";
 
+// import components
 import CardList from "./components/card-list/card-list.component";
+import SearchBox from "./components/search-box/search-box.component";
 
 class App extends Component {
   // the constructor is invoked first whenever the class is instantiated
@@ -53,12 +55,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input
-          className="search-box"
-          type="search"
-          placeholder="search monsters"
-          onChange={onChangeHandler}
-        />
+        <SearchBox className= "search-box" placeholder= "search monsters" onChangeHandler= {onChangeHandler} />
         <CardList monsters= {filteredMonsters}/>
       </div>
     );
