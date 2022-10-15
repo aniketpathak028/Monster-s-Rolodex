@@ -1,7 +1,8 @@
 import "./card.styles.css";
 
-const Card = ({ name, id, email }) => (
-  <div key={id} className="card-container">
+const Card = ({ monster }) => {
+  const { name, email, id } = monster;
+  return <div key={id} className="card-container">
     <img
       alt={`monster ${name}`}
       src={`https://robohash.org/${id}?set=set2&size=200x200`}
@@ -9,6 +10,6 @@ const Card = ({ name, id, email }) => (
     <h2>{name}</h2>
     <p>{email}</p>
   </div>
-);
+};
 
 export default Card;
