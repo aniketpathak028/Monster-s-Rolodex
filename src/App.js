@@ -9,14 +9,12 @@ import SearchBox from "./components/search-box/search-box.component";
 
 // Functional-Component
 const App = () => {
-  console.log("render");
   const [searchField, setSearchField] = useState("");
   const [monsters, setMonsters] = useState([]);
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
 
   // fetches the api data only when the app is mounted for the first time
   useEffect(() => {
-    console.log("event firing");
     fetch(`https://jsonplaceholder.typicode.com/users`)
       .then((response) => response.json())
       .then((users) => {
@@ -25,9 +23,11 @@ const App = () => {
   }, [setMonsters]);
 
   useEffect(() => {
-     setFilteredMonsters(monsters.filter((monster) => {
-      return monster.name.toLocaleLowerCase().includes(searchField);
-    }))
+    setFilteredMonsters(
+      monsters.filter((monster) => {
+        return monster.name.toLocaleLowerCase().includes(searchField);
+      })
+    );
   }, [monsters, searchField]);
 
   const onChangeHandler = (event) => {
